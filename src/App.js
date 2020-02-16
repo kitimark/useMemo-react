@@ -11,29 +11,29 @@ function App() {
         value={name} 
         onChange={e => setName(e.target.value)}
       />
-      <NameDisplay name={name} />
+      <NormalState.NameDisplay name={name} />
       <input 
         value={length} 
         onChange={e => setLength(e.target.value)}
       />
-      <FibDisplay length={length} />
+      <NormalState.FibDisplay length={length} />
       <p style={{ color: 'red' }}>HINT: See it how to render, just open dev console.</p>
     </>
   );
 }
 
-function NameDisplay({ name }) {
-  console.log('Rerendering name...')
-  return <p>Your name is {name}</p>
-}
-
-function FibDisplay({ length }) {
-  console.log('Calculating numbers & rerendering...')
-  const numbers = [1, 1]
-  for (let i = 2; i < length; i++) {
-    numbers[i] = numbers[i - 1] + numbers[i - 2]
+const NormalState = {
+  NameDisplay({ name }) {
+    console.log('Rerendering name...')
+    return <p>Your name is {name}</p>
+  },
+  FibDisplay({ length }) {
+    console.log('Calculating numbers & rerendering...')
+    const numbers = [1, 1]
+    for (let i = 2; i < length; i++) {
+      numbers[i] = numbers[i - 1] + numbers[i - 2]
+    }
+    return <p>{length} numbers of the fibonacci sequence: {numbers.join(', ')}</p>
   }
-  return <p>{length} numbers of the fibonacci sequence: {numbers.join(', ')}</p>
 }
-
 export default App;
