@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [length, setLength] = useState(3)
+  const [name, setName] = useState('John Doe')
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h2>normal useState</h2>
+      <input 
+        value={name} 
+        onChange={e => setName(e.target.value)}
+      />
+      <NameDisplay name={name} />
+      <input 
+        value={length} 
+        onChange={e => setLength(e.target.value)}
+      />
+      <FibDisplay length={length} />
+      <p style={{ color: 'red' }}>HINT: See it how to render, just open dev console.</p>
+    </>
   );
+}
+
+function NameDisplay({ name }) {
+  console.log('Rerendering name...')
+  return <p>Your name is {name}</p>
+}
+
+function FibDisplay({ length }) {
+  console.log('Calculating numbers & rerendering...')
+  const numbers = [1, 1]
+  for (let i = 2; i < length; i++) {
+    numbers[i] = numbers[i - 1] + numbers[i - 2]
+  }
+  return <p>{length} numbers of the fibonacci sequence: {numbers.join(', ')}</p>
 }
 
 export default App;
